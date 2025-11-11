@@ -82,10 +82,9 @@ func formatStackTraceArray() []string {
 
 	// Danh sách các hàm cần bỏ qua (utility functions)
 	skipFunctions := map[string]bool{
-		"main.formatStackTrace":           true,
-		"main.formatStackTraceArray":      true,
-		"main.getActualPanicLocation":     true,
-		"main.getPanicLocationForHandler": true,
+		"main.formatStackTraceArray":  true,
+		"main.getActualPanicLocation": true,
+		"main.HandlePanic":            true,
 	}
 
 	for i := 0; i < len(lines); i++ {

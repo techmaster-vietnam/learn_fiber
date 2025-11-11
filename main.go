@@ -42,7 +42,7 @@ func main() {
 	// Middleware
 	app.Use(requestid.New())
 	app.Use(logger.New())
-	app.Use(ErrorHandlerMiddleware())
+	app.Use(FiberErrorHandlerMiddleware())
 
 	// Routes - Home
 	app.Get("/", homeHandler)
