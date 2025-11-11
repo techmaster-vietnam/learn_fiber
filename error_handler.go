@@ -198,7 +198,7 @@ func logAndRespond(c *fiber.Ctx, appErr *AppError, requestPath string) {
 	}
 
 	// 1️⃣ Log vào CONSOLE (tất cả lỗi - development)
-	logToConsole(appErr, fields)
+	// logToConsole(appErr, fields) // Tắt text format, chỉ giữ JSON
 
 	// 2️⃣ Log vào FILE (chỉ lỗi nghiêm trọng - production)
 	if isSevereError(appErr.Type) {
@@ -211,20 +211,6 @@ func logAndRespond(c *fiber.Ctx, appErr *AppError, requestPath string) {
 		"type":       string(appErr.Type),
 		"request_id": appErr.RequestID,
 	})
-}
-
-// logToConsole log ra console với màu sắc
-func logToConsole(appErr *AppError, fields logrus.Fields) {
-	switch appErr.Type {
-	case PanicError, SystemError, ExternalError:
-		consoleLogger.WithFields(fields).Error(appErr.Message)
-	case BusinessError, ValidationError:
-		consoleLogger.WithFields(fields).Warn(appErr.Message)
-	case AuthError:
-		consoleLogger.WithFields(fields).Info(appErr.Message)
-	default:
-		consoleLogger.WithFields(fields).Error(appErr.Message)
-	}
 }
 
 // logToFile log lỗi nghiêm trọng ra file JSON

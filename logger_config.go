@@ -43,7 +43,7 @@ func initLoggers() {
 		LocalTime:  true,              // Dùng local time cho filename
 	}
 
-	// Ghi vào cả file và console (để debug)
+	// Ghi vào cả file và console (JSON format)
 	multiWriter := io.MultiWriter(logFile, os.Stdout)
 	fileLogger.SetOutput(multiWriter)
 
